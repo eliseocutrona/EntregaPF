@@ -1,0 +1,71 @@
+<h1 mat-dialog-title>ABM de cursos</h1>
+<div mat-dialog-content>
+  <form class="grid formgrid" [formGroup]="cursosForms">
+    <!--Nombre-->
+
+    <mat-form-field class="w-full">
+      <mat-label>Nombre del curso</mat-label>
+      <input [formControl]="nombreCursoControl" type="text" matInput />
+      <mat-error *ngFor="let error of nombreCursoControl.errors | keyvalue">{{
+        error | controlErrorMessages
+      }}</mat-error>
+    </mat-form-field>
+
+    <!--FechaInicio-->
+    <mat-form-field appearance="fill" class="w-8">
+      <mat-label>Seleccione una fecha de inicio</mat-label>
+      <input
+        matInput
+        [matDatepicker]="fechaInicio"
+        [formControl]="fechaInicioControl"
+      />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="fechaInicio"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #fechaInicio>
+        <mat-datepicker-actions>
+          <button mat-raised-button matDatepickerCancel>Cancelar</button>
+          <button mat-raised-button color="primary" matDatepickerApply>
+            Aceptar
+          </button>
+        </mat-datepicker-actions>
+      </mat-datepicker>
+    </mat-form-field>
+
+    <!--FechaFin-->
+    <mat-form-field appearance="fill" class="w-8">
+      <mat-label>Seleccione una fecha de fin</mat-label>
+      <input
+        matInput
+        [matDatepicker]="fechaFin"
+        [formControl]="fechaFinControl"
+      />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="fechaFin"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #fechaFin>
+        <mat-datepicker-actions>
+          <button mat-raised-button matDatepickerCancel>Cancelar</button>
+          <button mat-raised-button color="primary" matDatepickerApply>
+            Aceptar
+          </button>
+        </mat-datepicker-actions>
+      </mat-datepicker>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close="">Cancelar</button>
+  <button
+    (click)="guardar()"
+    color="primary"
+    mat-raised-button
+    [disabled]="cursosForms.invalid"
+  >
+    Guardar
+  </button>
+</div>

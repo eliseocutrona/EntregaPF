@@ -1,0 +1,42 @@
+<form class="grid formgrid" [formGroup]="usuariosDetalleForms">
+    <div class="grid divDetalle">
+      <div class="w-full">
+        <!-- Nombre del usuario -->
+        <mat-form-field appearance="fill" class="w-5">
+          <mat-label>Nombre</mat-label>
+          <input [formControl]="nombreControl" matInput readonly="true" />
+        </mat-form-field>
+        <!-- Apellido del usuario -->
+        <mat-form-field appearance="fill" class="w-5">
+          <mat-label>Apellido</mat-label>
+          <input [formControl]="apellidoControl" matInput readonly="true" />
+        </mat-form-field>
+      </div>
+  
+      <div class="w-full">
+        <!-- Email del usuario -->
+        <mat-form-field appearance="fill" class="w-5">
+          <mat-label>Email</mat-label>
+          <input [formControl]="emailControl" matInput readonly="true" />
+        </mat-form-field>
+
+        <!-- Password del usuario -->
+        <mat-form-field appearance="fill" class="w-5">
+          <mat-label>Password</mat-label>
+          <input [formControl]="passwordControl" matInput readonly="true" />
+        </mat-form-field>
+      </div> 
+      
+      <div class="w-full">
+        <!-- Role del usuario -->
+        <mat-form-field appearance="fill" class="w-5">
+          <mat-label>Role</mat-label>
+          <input [formControl]="roleControl" matInput readonly="true" />
+        </mat-form-field>
+      </div>        
+  
+    </div>
+  </form>
+  
+
+  

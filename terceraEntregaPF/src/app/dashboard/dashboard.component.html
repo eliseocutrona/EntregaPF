@@ -1,0 +1,34 @@
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <mat-nav-list>
+      <a [routerLink]="link.path" mat-list-item *ngFor="let link of links">
+        <ng-template [ngIf]="((authUser$ | async)?.role === 'admin' && link.path==='usuarios') || link.path!='usuarios'"> 
+        <mat-icon *ngIf="link.icon">{{ link.icon }}</mat-icon>
+        {{ link.title }}
+      </ng-template>
+        </a
+      >      
+    </mat-nav-list>
+  </mat-drawer>
+  <div class="example-sidenav-content">
+    <mat-toolbar color="primary">
+      <button
+        (click)="drawer.toggle()"
+        mat-icon-button
+        class="example-icon"
+        aria-label="Example icon-button with menu icon"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Cursos online </span>
+      <span class="example-spacer"></span>
+      <span class="usuario-log">{{ (authUser$ | async)?.nombre }}</span>
+      <a (click)="logout()" mat-mini-fab color="primary">
+        <mat-icon>logout</mat-icon></a
+      >
+    </mat-toolbar>
+    <main class="contenido">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</mat-drawer-container>

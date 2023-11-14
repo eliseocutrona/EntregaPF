@@ -1,0 +1,52 @@
+<mat-card class="login-card">
+  <mat-card-content>
+    <div class="center-content">
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <mat-form-field class="w-full">
+          <mat-label>Email</mat-label>
+          <input [formControl]="emailControl" placeholder="Email" matInput />
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          <mat-error *ngFor="let error of emailControl.errors | keyvalue">{{
+            error | controlErrorMessages
+          }}</mat-error>
+        </mat-form-field>
+        <br />
+        <mat-form-field class="w-full">
+          <mat-label>Contraseña</mat-label>
+
+          <input
+            [formControl]="passwordControl"
+            matInput
+            [type]="hide ? 'password' : 'text'"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+
+          <mat-error *ngFor="let error of passwordControl.errors | keyvalue">{{
+            error | controlErrorMessages
+          }}</mat-error>
+        </mat-form-field>
+
+        <div class="button-ingresar">
+          <button
+            mat-flat-button
+            color="primary"
+            type="submit"
+            class="button-ingresar"
+            [disabled]="loginForm.invalid"
+            (click)="login()"
+          >
+            Ingresar
+          </button>
+        </div>
+      </form>
+    </div>
+  </mat-card-content>
+</mat-card>

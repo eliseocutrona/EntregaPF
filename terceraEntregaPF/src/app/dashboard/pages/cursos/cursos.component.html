@@ -1,0 +1,113 @@
+<div class="mb-3"><h1 [appFontSize]="20">Listado de cursos</h1></div>
+
+<button
+  mat-flat-button
+  color="primary"
+  (click)="agregarCurso()"
+  class="agregar-curso"
+>
+  <mat-icon>add</mat-icon>
+  Agregar curso
+</button>
+<mat-form-field>
+  <mat-label>Buscar</mat-label>
+  <input
+    matInput
+    (keyup)="applyFilter($event)"
+    placeholder="Ingrese un valor"
+    #input
+  />
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource">
+    <!-- id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Id</th>
+      <td mat-cell *matCellDef="let curso">{{ curso.id }}</td>
+    </ng-container>
+
+    <!-- nombreCurso Column -->
+    <ng-container matColumnDef="nombreCurso">
+      <th mat-header-cell *matHeaderCellDef>Nombre del curso</th>
+      <td mat-cell *matCellDef="let curso">{{ curso.nombreCurso }}</td>
+    </ng-container>
+
+    <!-- FechaInicioCurso Column -->
+    <ng-container matColumnDef="fechaInicio">
+      <th mat-header-cell *matHeaderCellDef>Fecha de inicio</th>
+      <td mat-cell *matCellDef="let curso">{{ curso.fechaInicio | date }}</td>
+    </ng-container>
+
+    <!-- FechaFin Column -->
+    <ng-container matColumnDef="fechaFin">
+      <th mat-header-cell *matHeaderCellDef>Fecha de fin</th>
+      <td mat-cell *matCellDef="let curso">{{ curso.fechaFin | date }}</td>
+    </ng-container>
+
+    <!-- opciones delete -->
+    <ng-container matColumnDef="opcionesDelete">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let curso">
+        <ng-template [ngIf]="(authUser$ | async)?.role === 'admin'">  
+        <button
+          mat-icon-button
+          class="opciones-icon"
+          aria-label="Example icon-button with heart icon"
+          (click)="eliminar(curso)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+        </ng-template>
+      </td>
+    </ng-container>
+
+    <!-- opciones Edit -->
+    <ng-container matColumnDef="opcionesEdit">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let curso">
+        <ng-template [ngIf]="(authUser$ | async)?.role === 'admin'">  
+        <button
+          mat-icon-button
+          class="opciones-icon"
+          aria-label="Example icon-button with heart icon"
+          (click)="editar(curso)"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        </ng-template>
+      </td>
+    </ng-container>
+
+    <!-- opciones Detalle -->
+    <ng-container matColumnDef="opcionesDetalle">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let curso">
+        <button
+          mat-icon-button
+          class="opciones-icon"
+          aria-label="Example icon-button with heart icon"
+          (click)="detalle(curso.id)"
+        >
+          <mat-icon>preview</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">
+        No se encontraron datos que contengan "{{ input.value }}"
+      </td>
+    </tr>
+  </table>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    aria-label="Selecciona la página"
+    class="paginator"
+  >
+  </mat-paginator>
+</div>

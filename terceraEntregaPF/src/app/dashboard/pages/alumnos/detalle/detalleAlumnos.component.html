@@ -1,0 +1,76 @@
+<form class="grid formgrid" [formGroup]="alumnosDetalleForms">
+  <div class="grid divDetalle">
+    <div class="w-full">
+      <!-- Nombre del empleado -->
+      <mat-form-field appearance="fill" class="w-5">
+        <mat-label>Nombre</mat-label>
+        <input [formControl]="nombreControl" matInput readonly="true" />
+      </mat-form-field>
+      <!-- Apellido del empleado -->
+      <mat-form-field appearance="fill" class="w-5">
+        <mat-label>Apellido</mat-label>
+        <input [formControl]="apellidoControl" matInput readonly="true" />
+      </mat-form-field>
+    </div>
+
+    <div class="w-full">
+      <!-- Email del empleado -->
+      <mat-form-field appearance="fill" class="w-5">
+        <mat-label>Email</mat-label>
+        <input [formControl]="emailControl" matInput readonly="true" />
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="w-5">
+        <mat-label>Número de documento</mat-label>
+        <input [formControl]="nroDocumentoControl" matInput readonly="true" />
+      </mat-form-field>
+    </div>
+
+    <div class="w-full">
+      <!-- Número de documento del empleado -->
+    </div>
+  </div>
+</form>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <!-- nombreCurso Column -->
+  <ng-container matColumnDef="nombreCurso">
+    <th mat-header-cell *matHeaderCellDef>Nombre de curso</th>
+    <td mat-cell *matCellDef="let inscripcion">
+      {{ inscripcion.nombreCurso }}
+    </td>
+  </ng-container>
+
+  <!-- fechaInicioCurso Column -->
+  <ng-container matColumnDef="fechaInicioCurso">
+    <th mat-header-cell *matHeaderCellDef>Fecha de inicio</th>
+    <td mat-cell *matCellDef="let inscripcion">
+      {{ inscripcion.fechaInicioCurso | date }}
+    </td>
+  </ng-container>
+
+  <!-- fechaFinCurso Column -->
+  <ng-container matColumnDef="fechaFinCurso">
+    <th mat-header-cell *matHeaderCellDef>Fecha de fin</th>
+    <td mat-cell *matCellDef="let inscripcion">
+      {{ inscripcion.fechaFinCurso | date }}
+    </td>
+  </ng-container>
+
+  <!-- opciones Delete -->
+  <ng-container matColumnDef="opcionesDelete">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let inscripcion">
+      <button
+        mat-icon-button
+        class="opciones-icon-delete"
+        aria-label="Example icon-button with heart icon"
+        (click)="eliminar(inscripcion)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
